@@ -1,26 +1,22 @@
 var myApp = angular
 				.module('myModule',[])
-				.controller('myController',function($scope,$http,$log,httpSvc){
-					var successCallBack= function(res){
-						$scope.users = res.data;
+				.controller('myController',function($scope,httpSvc){
+					var authToken = '';
+					var getLocations = function(res){
+						authToken = res.data.results.Token;
+						httpSvc.getLocations(authToken).then(successCallBack, errorCallBack);
 					};
 
-					var errorCallBack= function(res){
+					var successCallBack= function(res){
+						console.log(res.data.results.Locations)
+						$scope.locations = res.data.results.Locations;
+					};
+
+					var errorCallBack= function(err){
+						console.log(err.data);
 						$scope.error = err.data;
 					};
-					$scope.output = httpSvc.get().then(successCallBack, errorCallBack);
 
-var init = function(res){
-	console.log('inside');
-	
-};
-/*					$http({
-						method: 'GET',
-						url: 'https://api.github.com/users'})
-					.then(successCallBack, errorCallBack);
-					$scope.message ="Angular JS";*/
-
-					
-
+					httpSvc.postSession().then(getLocations, errorCallBack);
 				});
 

@@ -2,23 +2,25 @@
 <html lang="en" ng-app='myModule'>
   <head>
     <meta charset="utf-8">
-    <title>My HTML File</title>
+    <title>Cassandra Data</title>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <script src="bower_components/angular/angular.js"></script>
     <script src="Scripts/Scripts.js"></script>
-	<script src="Scripts/httpsvc.js"></script>
+  <script src="Scripts/httpsvc.js"></script>
   </head>
   <body>
-<div  ng-controller='myController'>
- 
-<p>Input something in the input box:</p>
-<p>Name: <input type="text" ng-model="name"></p>
-<p ng-bind="name"></p>
-
-<div ng-repeat='user in users'>
-	<div>'User Name:'{{user.login}}</div>
-</div>
-    <p>Nothing here {{'yet' + '!'}}</p>
-
+  <div  ng-controller='myController'>
+  <h3>Cassandra Locations Data</h3>
+  <table>
+  <td><b>Location Id</b></td>
+  <td><b>|</b></td>
+  <td><b>Location Name</b></td>
+    <tr ng-repeat='location in locations'>
+      <td>{{ location.Id }}</td>
+      <td>|</td>
+      <td>{{ location.Name }}</td>
+    </tr>
+  </table>
+  </div>
   </body>
 </html>
